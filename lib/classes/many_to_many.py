@@ -11,19 +11,19 @@ class Article:
         author._articles.append(self)
         magazine._articles.append(self)
         Article.all.append(self)
-    
+#property    
     @property
     def title(self):
         return self._title
-
+#property
     @property
     def author(self):
         return self._author
-
+#property
     @property
     def magazine(self):
         return self._magazine
-
+#setters
     @magazine.setter
     def magazine(self, value):
         if not isinstance(value, Magazine):
@@ -31,7 +31,7 @@ class Article:
         self._magazine._articles.remove(self)
         value._articles.append(self)
         self._magazine = value
-
+#setters
     @author.setter
     def author(self, value):
         if not isinstance(value, Author):
@@ -80,7 +80,7 @@ class Magazine:
         self._category = category
         self._articles = []
         Magazine._magazines.append(self)
-
+#property
     @property
     def name(self):
         return self._name
@@ -90,28 +90,28 @@ class Magazine:
         if not isinstance(value, str) or not (2 <= len(value) <= 16):
             raise ValueError("Name must be a string with 2 to 16 characters.")
         self._name = value
-
+#property
     @property
     def category(self):
         return self._category
-
+#setters
     @category.setter
     def category(self, value):
         if not isinstance(value, str) or len(value) == 0:
             raise ValueError("Category must be a non-empty string.")
         self._category = value
-
+#articles
     def articles(self):
         return self._articles
-
+#contributors
     def contributors(self):
         return list({article.author for article in self._articles})
-
+#article titles
     def article_titles(self):
         if not self._articles:
             return None
         return [article.title for article in self._articles]
-
+#contributers(authors)
     def contributing_authors(self):
         from collections import Counter
         author_count = Counter(article.author for article in self._articles)
